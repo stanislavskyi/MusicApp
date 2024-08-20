@@ -1,6 +1,7 @@
 package com.hfad.musicapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.hfad.musicapp.Music
@@ -25,15 +26,15 @@ class MusicAdapter : ListAdapter<Music, MusicViewHolder>(MusicDiffCallback) {
         with(holder.binding){
             with(music){
                 title.text = name
-                holder.itemView.setOnClickListener {
-                    onMusicClickListener?.onMusicClick(this)
+                holder.binding.imageView.setOnClickListener {
+                    onMusicClickListener?.onMusicClick(this, imageView)
                 }
             }
         }
     }
 
     interface OnMusicClickListener{
-        fun onMusicClick(music: Music)
+        fun onMusicClick(music: Music, sharedView: View)
     }
 }
 

@@ -1,5 +1,6 @@
 package com.hfad.musicapp
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.TimeUtils
@@ -8,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialContainerTransform
 import com.hfad.musicapp.adapter.MusicAdapter
 import com.hfad.musicapp.databinding.FragmentHomeBinding
 import java.time.LocalTime
@@ -21,6 +26,10 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: MusicAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,8 +58,23 @@ class HomeFragment : Fragment() {
         }
 
         adapter.onMusicClickListener = object :MusicAdapter.OnMusicClickListener{
-            override fun onMusicClick(music: Music) {
+            override fun onMusicClick(music: Music, sharedView: View) {
                 Toast.makeText(requireActivity(), "$music", Toast.LENGTH_SHORT).show()
+                val blankFragment = BlankFragment()
+                val transform = MaterialContainerTransform().apply {
+                    scrimColor = Color.TRANSPARENT
+                    duration = 600L
+                }
+                blankFragment.sharedElementEnterTransition = transform
+                blankFragment.exitTransition = Hold()
+//                val extras = FragmentNavigatorExtras(sharedView to "shared_element_container")
+//                findNavController().navigate(R.id.action_homeFragment_to_blankFragment, null, null, extras)
+
+                parentFragmentManager.beginTransaction()
+                    .addSharedElement(sharedView, "shared_element_container")
+                    .replace(R.id.main_container, blankFragment)
+                    .addToBackStack(null)
+                    .commit()
             }
 
         }

@@ -25,5 +25,11 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
+        if (savedInstanceState == null){
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, HomeFragment())
+                .commit()
+        }
     }
 }
