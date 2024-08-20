@@ -7,6 +7,9 @@ import com.hfad.musicapp.Music
 import com.hfad.musicapp.databinding.ItemMusicBinding
 
 class MusicAdapter : ListAdapter<Music, MusicViewHolder>(MusicDiffCallback) {
+
+    var onMusicClickListener: OnMusicClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
         val binding = ItemMusicBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -22,8 +25,15 @@ class MusicAdapter : ListAdapter<Music, MusicViewHolder>(MusicDiffCallback) {
         with(holder.binding){
             with(music){
                 title.text = name
+                holder.itemView.setOnClickListener {
+                    onMusicClickListener?.onMusicClick(this)
+                }
             }
         }
+    }
+
+    interface OnMusicClickListener{
+        fun onMusicClick(music: Music)
     }
 }
 

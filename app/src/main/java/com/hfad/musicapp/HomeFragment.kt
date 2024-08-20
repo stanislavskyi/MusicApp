@@ -6,6 +6,7 @@ import android.util.TimeUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +46,13 @@ class HomeFragment : Fragment() {
             Log.d("HomeFragment", "$list")
             // Передаем новую копию списка в адаптер
             adapter.submitList(list.toList())
+        }
+
+        adapter.onMusicClickListener = object :MusicAdapter.OnMusicClickListener{
+            override fun onMusicClick(music: Music) {
+                Toast.makeText(requireActivity(), "$music", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

@@ -1,11 +1,18 @@
 package com.hfad.musicapp
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.transition.Fade
+import android.transition.TransitionManager
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.hfad.musicapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,5 +26,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
     }
-
 }

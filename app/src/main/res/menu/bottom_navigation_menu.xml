@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <item
         android:id="@+id/home"
-        android:icon="@drawable/selector_home"
-        android:title="Home"/>
+        android:icon="@drawable/home_24px"
+        android:title="home"
+        android:contentDescription="home"
+        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/favorite"
-        android:icon="@drawable/selector_favorite"
-        android:title="Favorite" />
+        android:icon="@drawable/home_fill_24px"
+        android:title="favorite"
+        android:contentDescription="favorite"
+        app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/favorite2"
+        android:icon="@drawable/favorite_24px"
+        android:title="favorite"
+        android:contentDescription="favorite"
+        app:showAsAction="ifRoom"/>
 </menu>
 
 
